@@ -65,13 +65,13 @@ f_S26 = f_S21 - f_S24
 function thermo_data()
 
     return Dict(
-        "O2" => (MW=32.000, SpG=0.50, h_L=2300, a_liq=0.3, b_liq=0, a=0.218, b=0.0001, mol_vol=64.178, A=9.2, B=0, C=273),
-        "CO2" => (MW=44.010, SpG=1.18, h_L=2429, a_liq=0.60, b_liq=0, a=0.230, b=0, mol_vol=37.4, A=7.937, B=0, C=273),
-        "C2H4" => (MW=28.052, SpG=0.57, h_L=1260, a_liq=0.60, b_liq=0, a=0.370, b=0.0007, mol_vol=49.347, A=9.497, B=-313, C=273),
-        "C2H6" => (MW=30.068, SpG=0.57, h_L=1260, a_liq=0.60, b_liq=0, a=0.370, b=0.0007, mol_vol=52.866, A=9.497, B=-313, C=273),
-        "VAc" => (MW=86.088, SpG=0.85, h_L=8600, a_liq=0.44, b_liq=0.0011, a=0.290, b=0.0006, mol_vol=101.564, A=12.6564, B=-2984.45, C=226.66),
-        "H2O" => (MW=18.008, SpG=1.00, h_L=10684, a_liq=0.99, b_liq=0.0002, a=0.560, b=-0.0016, mol_vol=18.01, A=14.6394, B=-3984.92, C=233.426),
-        "HAc" => (MW=60.052, SpG=0.98, h_L=5486, a_liq=0.46, b_liq=0.0012, a=0.520, b=0.0007, mol_vol=61.445, A=14.5236, B=-4457.83, C=258.45))
+        "O2" => (MW=32.000, SpG=0.50, h_L=2300, a_liq=0.3, b_liq=0, a=0.218, b=0.0001, v=64.178, A=9.2, B=0, C=273),
+        "CO2" => (MW=44.010, SpG=1.18, h_L=2429, a_liq=0.60, b_liq=0, a=0.230, b=0, v=37.4, A=7.937, B=0, C=273),
+        "C2H4" => (MW=28.052, SpG=0.57, h_L=1260, a_liq=0.60, b_liq=0, a=0.370, b=0.0007, v=49.347, A=9.497, B=-313, C=273),
+        "C2H6" => (MW=30.068, SpG=0.57, h_L=1260, a_liq=0.60, b_liq=0, a=0.370, b=0.0007, v=52.866, A=9.497, B=-313, C=273),
+        "VAc" => (MW=86.088, SpG=0.85, h_L=8600, a_liq=0.44, b_liq=0.0011, a=0.290, b=0.0006, v=101.564, A=12.6564, B=-2984.45, C=226.66),
+        "H2O" => (MW=18.008, SpG=1.00, h_L=10684, a_liq=0.99, b_liq=0.0002, a=0.560, b=-0.0016, v=18.01, A=14.6394, B=-3984.92, C=233.426),
+        "HAc" => (MW=60.052, SpG=0.98, h_L=5486, a_liq=0.46, b_liq=0.0012, a=0.520, b=0.0007, v=61.445, A=14.5236, B=-4457.83, C=258.45))
 
 end
 
@@ -118,8 +118,6 @@ end
 
 # Example usage of the thermo data dict
 thermo = thermo_data()
-O2 = thermo["O2"]
-h_liq_O2_100C = h_liq(100, O2)
 
 # Ethylene feed (f_S1) with inert ethane
 y_1_C2H6 = 0.001
@@ -362,15 +360,7 @@ p = ComponentVector(
         f=f_S1,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -383,15 +373,7 @@ p = ComponentVector(
         f=f_S2,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -404,15 +386,7 @@ p = ComponentVector(
         f=f_S3,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -425,15 +399,7 @@ p = ComponentVector(
         f=f_S4,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -446,15 +412,7 @@ p = ComponentVector(
         f=f_S5,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -467,15 +425,7 @@ p = ComponentVector(
         f=f_S6,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -488,15 +438,7 @@ p = ComponentVector(
         f=f_S7,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -509,15 +451,7 @@ p = ComponentVector(
         f=f_S8,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -530,15 +464,7 @@ p = ComponentVector(
         f=f_S9,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -551,15 +477,7 @@ p = ComponentVector(
         f=f_S10,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -568,7 +486,7 @@ p = ComponentVector(
             HAc=0.1,
         )
     ),
-    S11=(
+    S11=( # Stream 11 is unique because S10 partial condenes before entering the separator
         f=f_S11,
         T=T_guess,
         P=P_guess,
@@ -593,15 +511,7 @@ p = ComponentVector(
         f=f_S12,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -614,15 +524,7 @@ p = ComponentVector(
         f=f_S13,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -635,15 +537,7 @@ p = ComponentVector(
         f=f_S14,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -656,15 +550,7 @@ p = ComponentVector(
         f=f_S15,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -677,15 +563,7 @@ p = ComponentVector(
         f=f_S16,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -698,15 +576,7 @@ p = ComponentVector(
         f=f_S17,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -719,15 +589,7 @@ p = ComponentVector(
         f=f_S18,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -740,15 +602,7 @@ p = ComponentVector(
         f=f_S19,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -761,15 +615,7 @@ p = ComponentVector(
         f=f_S20,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -782,15 +628,7 @@ p = ComponentVector(
         f=f_S21,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -803,15 +641,7 @@ p = ComponentVector(
         f=f_S22,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -824,15 +654,7 @@ p = ComponentVector(
         f=f_S23,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -845,15 +667,7 @@ p = ComponentVector(
         f=f_S24,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -866,15 +680,7 @@ p = ComponentVector(
         f=f_S25,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -887,15 +693,7 @@ p = ComponentVector(
         f=f_S26,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -908,15 +706,7 @@ p = ComponentVector(
         f=f_S27,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -929,15 +719,7 @@ p = ComponentVector(
         f=f_S28,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -950,15 +732,7 @@ p = ComponentVector(
         f=f_S29,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -971,15 +745,7 @@ p = ComponentVector(
         f=f_S30,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -992,15 +758,7 @@ p = ComponentVector(
         f=f_S31,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -1013,15 +771,7 @@ p = ComponentVector(
         f=f_S32,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -1034,15 +784,7 @@ p = ComponentVector(
         f=f_S33,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -1055,15 +797,7 @@ p = ComponentVector(
         f=f_S34,
         T=T_guess,
         P=P_guess,
-        x=(
-            C2H4=0.1,
-            O2=0.5,
-            CO2=0.1,
-            H2O=0.1,
-            VAc=0.1,
-            HAc=0.1,
-        ),
-        y=(
+        z=(
             C2H4=0.1,
             O2=0.5,
             CO2=0.1,
@@ -1074,11 +808,111 @@ p = ComponentVector(
     ),
 )
 
+# Wilson parameter and activity coefficient calculations
+O2 = thermo["O2"]
+CO2 = thermo["CO2"]
+C2H4 = thermo["C2H4"]
+VAc = thermo["VAc"]
+H2O = thermo["H2O"]
+HAc = thermo["HAc"]
 
-# Fill this in to get the steady state values for state variables:
-function f!(F, x, p)
-    # Wrap F to match the structure of x (so we can use names on the left side for dxdt)
-    resid = ComponentVector(F, getaxes(x))
+# Dictionary of Wilson Parameters (aij) of Each Species Pair Existing in the Liquid Phase of the Vinyl Acetate Process
+a_ij = Dict(
+    ("VAc", "VAc") => 0.0,
+    ("VAc", "H2O") => 2266.4,
+    ("VAc", "HAc") => 726.7,
+    ("H2O", "VAc") => 1384.6,
+    ("H2O", "H2O") => 0.0,
+    ("H2O", "HAc") => 230.6,
+    ("HAc", "VAc") => -136.1,
+    ("HAc", "H2O") => 670.7,
+    ("HAc", "HAc") => 0.0,
+    ("VAc", "O2") => 0.0,
+    ("VAc", "CO2") => 0.0,
+    ("VAc", "C2H4") => 0.0,
+    ("H2O", "O2") => 0.0,
+    ("H2O", "CO2") => 0.0,
+    ("H2O", "C2H4") => 0.0,
+    ("HAc", "O2") => 0.0,
+    ("HAc", "CO2") => 0.0,
+    ("HAc", "C2H4") => 0.0,
+    ("O2", "C2H4") => 0.0,
+    ("O2", "HAc") => 0.0,
+    ("O2", "H2O") => 0.0,
+    ("O2", "VAc") => 0.0,
+    ("O2", "O2") => 0.0,
+    ("O2", "CO2") => 0.0,
+    ("CO2", "C2H4") => 0.0,
+    ("CO2", "HAc") => 0.0,
+    ("CO2", "H2O") => 0.0,
+    ("CO2", "VAc") => 0.0,
+    ("CO2", "O2") => 0.0,
+    ("CO2", "CO2") => 0.0,
+    ("C2H4", "O2") => 0.0,
+    ("C2H4", "CO2") => 0.0,
+    ("C2H4", "HAc") => 0.0,
+    ("C2H4", "H2O") => 0.0,
+    ("C2H4", "VAc") => 0.0,
+    ("C2H4", "C2H4") => 0.0
+)
 
-end
 
+
+R_gas = 1.987 # cal/(mol·K)
+T_state = 200
+x_C2H4 = 0.2
+x_O2 = 0.3
+x_HAc = 0.1
+x_VAc = 0.15
+x_CO2 = 0.15
+x_H2O = 0.1
+
+i = ["C2H4", "O2", "HAc", "VAc", "CO2", "H2O"]
+x = [x_C2H4, x_O2, x_HAc, x_VAc, x_CO2, x_H2O]
+j = filter(x -> x != "C2H4", i)
+Lambda_C2H4_j = [thermo["C2H4"].v / thermo[j[index]].v * exp(-a_ij[("C2H4", j[index])] / (R_gas * (T_state + 273.15))) for index in 1:length(j)]
+
+j = filter(x -> x != "O2", i)
+Lambda_O2_j = [thermo["O2"].v / thermo[j[index]].v * exp(-a_ij[("O2", j[index])] / (R_gas * (T_state + 273.15))) for index in 1:length(j)]
+
+j = filter(x -> x != "HAc", i)
+Lambda_HAc_j = [thermo["HAc"].v / thermo[j[index]].v * exp(-a_ij[("HAc", j[index])] / (R_gas * (T_state + 273.15))) for index in 1:length(j)]
+
+j = filter(x -> x != "VAc", i)
+Lambda_VAc_j = [thermo["VAc"].v / thermo[j[index]].v * exp(-a_ij[("VAc", j[index])] / (R_gas * (T_state + 273.15))) for index in 1:length(j)]
+
+j = filter(x -> x != "CO2", i)
+Lambda_CO2_j = [thermo["CO2"].v / thermo[j[index]].v * exp(-a_ij[("CO2", j[index])] / (R_gas * (T_state + 273.15))) for index in 1:length(j)]
+
+j = filter(x -> x != "H2O", i)
+Lambda_H2O_j = [thermo["H2O"].v / thermo[j[index]].v * exp(-a_ij[("H2O", j[index])] / (R_gas * (T_state + 273.15))) for index in 1:length(j)]
+
+Lambda_C2H4_j = vcat(0, Lambda_C2H4_j)
+Lambda_O2_j = vcat(Lambda_O2_j[1], 0, Lambda_O2_j[2:end])
+Lambda_HAc_j = vcat(Lambda_HAc_j[1:2], 0, Lambda_HAc_j[3:end])
+Lambda_VAc_j = vcat(Lambda_VAc_j[1:3], 0, Lambda_VAc_j[4:end])
+Lambda_CO2_j = vcat(Lambda_CO2_j[1:4], 0, Lambda_CO2_j[5:end])
+Lambda_H2O_j = vcat(Lambda_H2O_j[1:5], 0)
+# What I need and am having trouble writing is: ln gamma_i = 1 - ln(sum_j x_j * lambda_ji) - sum_j (x_j * lambda_ij / sum_k x_k * lambda_kj)
+# Can you write this out for me? :)
+ln_gamma_C2H4 = 1 - log(sum(x[j_index] * Lambda_C2H4_j[j_index] for j_index in 1:length(i))) - sum(x[j_index] * Lambda_C2H4_j[j_index] / sum(x[k_index] * Lambda_C2H4_j[k_index] for k_index in 1:length(i)) for j_index in 1:length(i))
+ln_gamma_O2 = 1 - log(sum(x[j_index] * Lambda_O2_j[j_index] for j_index in 1:length(i))) - sum(x[j_index] * Lambda_O2_j[j_index] / sum(x[k_index] * Lambda_O2_j[k_index] for k_index in 1:length(i)) for j_index in 1:length(i))
+ln_gamma_HAc = 1 - log(sum(x[j_index] * Lambda_HAc_j[j_index] for j_index in 1:length(i))) - sum(x[j_index] * Lambda_HAc_j[j_index] / sum(x[k_index] * Lambda_HAc_j[k_index] for k_index in 1:length(i)) for j_index in 1:length(i))
+ln_gamma_VAc = 1 - log(sum(x[j_index] * Lambda_VAc_j[j_index] for j_index in 1:length(i))) - sum(x[j_index] * Lambda_VAc_j[j_index] / sum(x[k_index] * Lambda_VAc_j[k_index] for k_index in 1:length(i)) for j_index in 1:length(i))
+ln_gamma_CO2 = 1 - log(sum(x[j_index] * Lambda_CO2_j[j_index] for j_index in 1:length(i))) - sum(x[j_index] * Lambda_CO2_j[j_index] / sum(x[k_index] * Lambda_CO2_j[k_index] for k_index in 1:length(i)) for j_index in 1:length(i))
+ln_gamma_H2O = 1 - log(sum(x[j_index] * Lambda_H2O_j[j_index] for j_index in 1:length(i))) - sum(x[j_index] * Lambda_H2O_j[j_index] / sum(x[k_index] * Lambda_H2O_j[k_index] for k_index in 1:length(i)) for j_index in 1:length(i))
+
+gamma_C2H4 = exp(ln_gamma_C2H4)
+gamma_O2 = exp(ln_gamma_O2)
+gamma_HAc = exp(ln_gamma_HAc)
+gamma_VAc = exp(ln_gamma_VAc)
+gamma_CO2 = exp(ln_gamma_CO2)
+gamma_H2O = exp(ln_gamma_H2O)
+
+println("Activity Coefficients at T = $T_state °C:")
+println("γ_C2H4 = $gamma_C2H4")
+println("γ_O2 = $gamma_O2")
+println("γ_HAc = $gamma_HAc")
+println("γ_VAc = $gamma_VAc")
+println("γ_CO2 = $gamma_CO2")
+println("γ_H2O = $gamma_H2O")
